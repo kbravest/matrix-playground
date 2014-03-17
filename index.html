@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- META DATA -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--[if IE]><meta http-equiv="cleartype" content="on" /><![endif]-->
+
+    <!-- SEO -->
+    <title>Matrix Transform Playground</title>
+
+    <link rel="stylesheet" media="screen, projection" href="assets/styles/screen.css" />
+</head>
+<body>
+    <h1>Matrix Transform Playground</h1>
+
+    <div class="hlist">
+        <div class="section">
+            <ul class="js-transformButtons transformButtons">
+
+                <li class="js-transformAdd panel" data-transformtype="translate">
+                    <div class="btn btn_add" data-transformtype="translate">Translate</div>
+                </li>
+                <li class="js-transformAdd panel" data-transformtype="scale">
+                    <div class=" btn btn_add">Scale</div>
+                </li>
+                <li class="js-transformAdd panel" data-transformtype="rotate">
+                    <div class="btn btn_add">Rotate</div>
+                </li>
+                <li class="js-transformAdd panel" data-transformtype="shear">
+                    <div class="btn btn_add" >Shear</div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="js-transformList-template template">
+                <li class="js-transformList-row panel" data-transformtype="translate">
+                    <div>
+                        Translate
+                    </div>
+                    <div>
+                        X: <input type="number" value="0"/>
+                    </div>
+                    <div>
+                        Y: <input type="number" value="0"/>
+                    </div>
+                    <div class="js-transformDelete btn btn_remove">remove</div>
+                </li>
+                <li class="js-transformList-row panel" data-transformtype="scale">
+                    <div>
+                        Scale
+                    </div>
+                    <div>
+                        X: <input type="number" value="0"/>
+                    </div>
+                    <div>
+                        Y: <input type="number" value="0"/>
+                    </div>
+                    <div class="js-transformDelete btn btn_remove">remove</div>
+                </li>
+                <li class="js-transformList-row panel" data-transformtype="rotate">
+                    <div>
+                        Rotate
+                    </div>
+                    <div>
+                        <input type="number" value="0"/>&deg;
+                    </div>
+                    <div>
+                    </div>
+                    <div class="js-transformDelete btn btn_remove">remove</div>
+                </li>
+                <li class="js-transformList-row panel" data-transformtype="shear">
+                    <div>
+                        Shear
+                    </div>
+                    <div>
+                        X: <input type="number" value="0"/>
+                    </div>
+                    <div>
+                        Y: <input type="number" value="0"/>
+                    </div>
+                    <div class="js-transformDelete btn btn_remove">remove</div>
+                </li>
+            </ul>
+
+            <ul class="js-transformList transformList">
+                <!-- to be inserted dynamically -->
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div class="section">
+        <div class="js-outputMatrix outputMatrix">
+            <table class="panel">
+                <tr>
+                    <td title="Scale in the x direction" data-index="a"><input type="number" value="0"/></td>
+                    <td title="Shear in the x direction" data-index="b"><input type="number" value="0"/></td>
+                    <td title="Translate in the x direction" data-index="c"><input type="number" value="0"/></td>
+                </tr>
+                <tr>
+                    <td title="Shear in the y direction" data-index="d"><input type="number" value="0"/></td>
+                    <td title="Scale in the y direction" data-index="e"><input type="number" value="0"/></td>
+                    <td title="Translate in the y direction" data-index="f"><input type="number" value="0"/></td>
+                </tr>
+                <tr>
+                    <td data-index="g">0</td>
+                    <td data-index="h">0</td>
+                    <td data-index="i">1</td>
+                </tr>
+            </table>
+
+            <table class="panel">
+                <tr>
+                    <td>x</td>
+                </tr>
+                <tr>
+                    <td>y</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>=</td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+
+            <table class="panel">
+                <tr>
+                    <td data-index="x"></td>
+                </tr>
+                <tr>
+                    <td data-index="y"></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div>
+        <div class="js-outputMatrixArray outputMatrixArray"></div>
+        <div class="js-outputCanvas outputCanvas">
+            <canvas></canvas>
+        </div>
+    </div>
+
+    <script src="assets/scripts/jquery.1.11.0.min.js"></script>
+    <script src="assets/scripts/jquery.sortable.js"></script>
+    <script src="assets/scripts/TransformTracker.js"></script>
+    <script type="text/javascript" src="assets/scripts/App.js"></script>
+
+</body>
+</html>
