@@ -7,7 +7,7 @@
 
 "use strict";
 
-function Transform(context) {
+function TransformTracker(context) {
     this.context = context;
     this.matrix = [1,0,0,1,0,0]; //initialize with the identity matrix
     this.stack = [];
