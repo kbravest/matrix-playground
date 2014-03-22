@@ -1,81 +1,75 @@
-var $outputMatrixArray = $('.js-outputMatrixArray');
-var $outputMatrix = $('.js-outputMatrix');
+angular.module('MatrixPlaygroundApp').controller('MatrixController', function ($scope, $rootScope) {
+    'use strict';
 
-$outputMatrix.on('keyup', 'input', onMatrixKeyUp);
-$outputMatrix.on('change', 'input', onMatrixChange);
-$outputMatrix.on('focus', 'input', onMatrixFocus);
+    var DECIMAL_PLACES = 2;
 
-function onMatrixKeyUp(event) {
-    console.log('onMatrixKeyUp');
+    $scope.matrix = $rootScope.matrix;
 
-    transformList.removeAll();
+    $scope.changeMatrix = function() {
+        $rootScope.lastChanged = 'matrix';
+    };
 
-    var matrix = viewToMatrix();
-    transformList.setMatrix(matrix);
+    $scope.formatEquationX = function() {
+        return formatEquation(
+            $scope.matrix[0], 
+            $scope.matrix[2], 
+            $scope.matrix[4]
+        );
+    };
 
-    renderCanvas();
-}
+    $scope.formatEquationY = function() {
+        return formatEquation(
+            $scope.matrix[1],
+            $scope.matrix[3],
+            $scope.matrix[5]
+        );
+    };
 
-function onMatrixChange(event) {
-    console.log('onMatrixChange');
+    $scope.formatCodeBlock = function() {
+        var matrixRounded = [
+            roundTo($scope.matrix[0], 2), // a
+            roundTo($scope.matrix[1], 2), // d
+            roundTo($scope.matrix[2], 2), // b
+            roundTo($scope.matrix[3], 2), // e
+            roundTo($scope.matrix[4], 2), // c
+            roundTo($scope.matrix[5], 2)  // f
+        ];
 
-    transformList.removeAll();
+        return 'context.setTransform(' + matrixRounded + ');';
+    };
 
-    var matrix = viewToMatrix();
-    transformList.setMatrix(matrix);
+    var roundTo = function(number, decimalPlaces) {
+        // plus sign drops any extra zeroes at the end
+        var result = +parseFloat(number).toFixed(decimalPlaces); 
+        return result;
+    };
 
-    renderList();
-}
+    var formatEquation = function(x, y, z) {
+        var i = 0;
+        var expression = [];
+        var expressionString = '';
 
-function onMatrixFocus(event) {
-    var input = event.currentTarget;
-    //input.select();
-}
+        x = roundTo(x, DECIMAL_PLACES);
+        y = roundTo(y, DECIMAL_PLACES);
+        z = roundTo(z, DECIMAL_PLACES);
 
-function renderMatrix() {
-    console.log('renderMatrix');
+        expression.push(x === 0 ? '' : x + 'x');
+        expression.push(y === 0 ? '' : y + 'y');
+        expression.push(z === 0 ? '' : z);
 
-    var matrix = transformList.getMatrix();
+        for (i = 0; i < expression.length; i++) {
+            if (expression[i] !== '') {
+                if (expressionString !== '') {
+                    expressionString += ' + ';
+                }
+                expressionString += expression[i];
+            }
+        }
+        if (expressionString === '') { 
+            expressionString = 0; 
+        }
 
-    var $a = $outputMatrix.find('[data-index="a"] input');
-    var $b = $outputMatrix.find('[data-index="b"] input');
-    var $c = $outputMatrix.find('[data-index="c"] input');
-    var $d = $outputMatrix.find('[data-index="d"] input');
-    var $e = $outputMatrix.find('[data-index="e"] input');
-    var $f = $outputMatrix.find('[data-index="f"] input');
+        return expressionString;
+    };
 
-    $a.val(roundToPlace(matrix[0], 2));
-    $b.val(roundToPlace(matrix[2], 2));
-    $c.val(roundToPlace(matrix[4], 2));
-    $d.val(roundToPlace(matrix[1], 2));
-    $e.val(roundToPlace(matrix[3], 2));
-    $f.val(roundToPlace(matrix[5], 2));
-
-    renderCanvas();
-}
-
-function viewToMatrix() {
-    var matrix = [];
-
-    var $a = $outputMatrix.find('[data-index="a"] input');
-    var $b = $outputMatrix.find('[data-index="b"] input');
-    var $c = $outputMatrix.find('[data-index="c"] input');
-    var $d = $outputMatrix.find('[data-index="d"] input');
-    var $e = $outputMatrix.find('[data-index="e"] input');
-    var $f = $outputMatrix.find('[data-index="f"] input');
-
-    matrix[0] = $a.val();
-    matrix[2] = $b.val();
-    matrix[4] = $c.val();
-    matrix[1] = $d.val();
-    matrix[3] = $e.val();
-    matrix[5] = $f.val();
-
-    return matrix;
-}
-
-function roundToPlace(number, decimalPlaces) {
-    // plus sign drops any extra zeroes at the end
-    var result = +parseFloat(number).toFixed(decimalPlaces); 
-    return result;
-}
+});

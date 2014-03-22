@@ -43,12 +43,15 @@ $.fn.sortable = function(options) {
 			dt.setData('Text', 'dummy');
 			index = (dragging = $(this)).addClass('sortable-dragging').index();
 		}).on('dragend.h5s', function() {
-			dragging.removeClass('sortable-dragging').show();
-			placeholders.detach();
-			if (index != dragging.index()) {
-				items.parent().trigger('sortupdate', {item: dragging});
+			if (dragging != null) {
+				dragging.removeClass('sortable-dragging').show();
+
+				placeholders.detach();
+				if (index != dragging.index()) {
+					items.parent().trigger('sortupdate', {item: dragging});
+				}
+				dragging = null;
 			}
-			dragging = null;
 		}).not('a[href], img').on('selectstart.h5s', function() {
 			this.dragDrop && this.dragDrop();
 			return false;

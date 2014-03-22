@@ -1,9 +1,3 @@
-// ==============================
-// Binding
-// ==============================
-//var transformList = [];
-//var globalMatrix = [1,0,0,1,0,0];
-
 var TransformList = (function() {
     'use strict';
 
@@ -24,6 +18,13 @@ var TransformList = (function() {
         this.recomputeMatrix();
 
         console.log('updateRow', rowNumber, arg1, arg2, this.transforms);
+    };
+
+    proto.addRange = function(transforms) {
+        for (var i = 0; i < transforms.length; i++) {
+            var transform = transforms[i];
+            this.add(transform.type, transform.arg1, transform.arg2);
+        }
     };
 
     proto.add = function(transformtype, arg1, arg2) {
@@ -65,16 +66,31 @@ var TransformList = (function() {
     };
 
     proto.removeAll = function() {
-        this.transforms = [];
+        // Intentionally not doing [] here because I don't want to 
+        // create a new array reference
+        this.transforms.length = 0; 
 
         this.recomputeMatrix();
     };
 
-    proto.remove = function(rowNumber) {
-        //console.log('removeRow', rowNumber, this.transforms);
-        this.transforms.splice(rowNumber, 1);
+    proto.remove = function(objectOrRownumber) {
+        var rowNumber = null;
 
-        this.recomputeMatrix();
+        if (typeof objectOrRownumber === 'number') {
+            rowNumber = objectOrRownumber;
+        } else {
+            for (var i = 0; i < this.transforms.length; i++) {
+                if (objectOrRownumber === this.transforms[i]) {
+                    rowNumber = i;
+                    break;
+                }
+            }
+        }
+
+        if (rowNumber != null) {
+            this.transforms.splice(rowNumber, 1);
+            this.recomputeMatrix();
+        }
     };
 
     proto.getTransforms = function() {
@@ -82,7 +98,12 @@ var TransformList = (function() {
     };
 
     proto.setMatrix = function(matrix) {
-        this.matrix = matrix;
+        this.matrix[0] = matrix[0];
+        this.matrix[1] = matrix[1];
+        this.matrix[2] = matrix[2];
+        this.matrix[3] = matrix[3];
+        this.matrix[4] = matrix[4];
+        this.matrix[5] = matrix[5];
     };
 
     proto.getMatrix = function() {
@@ -130,7 +151,7 @@ var TransformList = (function() {
             }
         }
 
-        this.matrix = transformTracker.getMatrix();
+        this.setMatrix(transformTracker.getMatrix());
     };
 
     return TransformList;
