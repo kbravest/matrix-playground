@@ -1,0 +1,55 @@
+<div ng-controller="TransformListController">
+    <div class="hlist">
+
+        <div class="panel">
+            <ul class="vlist">
+                <li 
+                    ng-click="add(transformType)" 
+                    ng-repeat="transformType in transformTypes">
+
+                    <div class="btn btn_add">
+                        add {{transformType}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <ul 
+            class="hlist draggable js-transformList" 
+            ng-class="{ draggable_isActive: isActive() }">
+            <li 
+                class="panel" 
+                ng-repeat="transform in transforms" 
+                on-before-render="onBeforeRender()">
+
+                <div class="grid">
+                    <div class="grid-row">
+                        {{ transform.type }}
+                    </div>
+
+                    <div class="grid-row" ng-show="transform.arg1label" >
+                        <div class="grid-col grid-col_20" ng-bind-html="transform.arg1label | safe">
+                        </div>
+                        <div class="grid-col grid-col_80">
+                            <input type="number" ng-model="transform.arg1" />
+                        </div>
+                    </div>
+
+                    <div class="grid-row" ng-show="transform.arg2label" >
+                        <div class="grid-col grid-col_20" ng-bind-html="transform.arg2label | safe">
+                        </div>
+                        <div class="grid-col grid-col_80">
+                            <input type="number" ng-model="transform.arg2"/>
+                        </div>
+                    </div>
+
+                    <div class="grid-row">
+                        <div class="grid-col">
+                            <div class="btn btn_remove" ng-click="remove(transform)">remove</div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

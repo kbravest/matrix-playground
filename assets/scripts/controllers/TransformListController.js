@@ -1,4 +1,6 @@
-angular.module('MatrixPlaygroundApp').controller('TransformListController', function ($timeout, $scope, transformation) {
+angular.module('MatrixPlaygroundApp')
+    .controller('TransformListController', function ($timeout, $scope, transformation) {
+        
     'use strict';
 
     $scope.transforms = transformation.transforms;
@@ -14,12 +16,12 @@ angular.module('MatrixPlaygroundApp').controller('TransformListController', func
     };
 
     $transformList.sortable().bind('sortupdate', function(event) {
-        var transforms = [];
-
-        //TODO: change to Array.map?
-        $transformList.children().each(function(index, element) {
+        // This is a DOM element update -> model update
+        // Retrieve the transform for each DOM element in the list
+        // And then update the model
+        var transforms = $transformList.children().map(function(index, element) {
             var scope = angular.element(element).scope()
-            transforms.push(scope.transform);
+            return scope.transform;
         });
 
         transformation.removeAll();

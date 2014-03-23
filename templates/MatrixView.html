@@ -1,0 +1,103 @@
+<div ng-controller="MatrixController">
+    <div class="hlist" >
+        <div class="panel">
+            <table>
+                <tr>
+                    <td class="cellLg" title="Scale in the x direction">
+                        <input type="number" class="textLg" ng-change="changeMatrix()" ng-model="matrix[0]" />
+                    </td>
+                    <td class="cellLg" title="Shear in the x direction">
+                        <input type="number" class="textLg" ng-change="changeMatrix()" ng-model="matrix[2]" />
+                    </td>
+                    <td class="cellLg" title="Translate in the x direction">
+                        <input type="number" class="textLg" ng-change="changeMatrix()" ng-model="matrix[4]" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg" title="Shear in the y direction">
+                        <input type="number" class="textLg" ng-change="changeMatrix()" ng-model="matrix[1]" />
+                    </td>
+                    <td class="cellLg" title="Scale in the y direction">
+                        <input type="number" class="textLg" ng-change="changeMatrix()" ng-model="matrix[3]" />
+                    </td>
+                    <td class="cellLg" title="Translate in the y direction">
+                        <input type="number" class="textLg" ng-change="changeMatrix()" ng-model="matrix[5]" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg" >
+                        <span class="textLg">0</span>
+                    </td>
+                    <td class="cellLg" >
+                        <span class="textLg">0</span>
+                    </td>
+                    <td class="cellLg" >
+                        <span class="textLg">1</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel">
+            <table>
+                <tr>
+                    <td class="cellLg">
+                        <span class="textLg">x</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg">
+                        <span class="textLg">y</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg">
+                        <span class="textLg">1</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table>
+                <tr>
+                    <td class="cellLg">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg">
+                        <span class="textLg">=</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel">
+            <table>
+                <tr>
+                    <td class="cellLg cellLg_auto">
+                        <span class="textLg">{{ formatEquationX() }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg cellLg_auto">
+                        <span class="textLg">{{ formatEquationY() }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cellLg cellLg_auto">
+                        <span class="textLg">1</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <code>
+        {{ formatCodeBlock() }}
+    </code>
+</div>

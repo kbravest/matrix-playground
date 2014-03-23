@@ -125,84 +125,165 @@ input {
     font: 13px Arial;
 }
 
+input {
+    width: 100%;
+    height: 100%;
+}
+
 h1 {
     font-size: 25px;
     margin-bottom: 10px;
 }
 
-.section {
-    margin-bottom: 10px;
+code {
+    font: 15px Courier;
+    color: #eeeeee;
 }
 
-.template {
-    display: none;
+/* ---------------------------------------------------------------------
+ Text Styles
+------------------------------------------------------------------------ */
+
+.textLg {
+    font-size: 20px;
 }
 
-.btn {
-    cursor: pointer;
-    background-repeat:no-repeat;
-    
+/* ---------------------------------------------------------------------
+ List Styles
+------------------------------------------------------------------------ */
+
+.hlist {
+
 }
 
-.btn_add {
-    width: 15px;
-    height: 15px;
-    background-size: 15px 15px;
-    background-image: url('../media/images/add.png');
-}
-
-.btn_remove {
-    position: absolute;
-    text-indent: -9999px;
-    right: 0px;
-    top: 0px;
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px;
-    background-image: url('../media/images/remove.png');
+.hlist:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .hlist > * {
-    float:left;
+    float: left;
+    margin-right: 10px;
 }
+
+.hlist > *:last-child {
+    margin-right: 0px;
+}
+
+.vlist {
+}
+
+.vlist > * {
+    margin-bottom: 10px;
+}
+
+.vlist > *:last-child {
+    margin-bottom: 0px;
+}
+
+/* ---------------------------------------------------------------------
+ Layout Styles
+------------------------------------------------------------------------ */
+
+.grid {
+
+}
+
+.grid-row {
+    margin-bottom: 10px;
+}
+
+.grid-row:last-child {
+    margin-bottom: 0px;
+}
+
+.grid-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.grid-col {
+    float: left;
+}
+
+.grid-col:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.grid-col_20 {
+    width: 20%;
+}
+
+.grid-col_80 {
+    width: 80%;
+}
+
+/* ---------------------------------------------------------------------
+ Panel  Styles
+------------------------------------------------------------------------ */
 
 .panel {
-    border-radius: 4px;
     background-color: #ffffff;
     box-shadow: 5px 5px 5px #777777;
-    padding: 5px;
+    border-radius: 4px;
+    padding: 10px;
 }
 
-.transformButtons > li {
-    width: 85px;
-    margin-bottom: 4px;
-    margin-right: 10px;
-    line-height: 15px;
-    text-indent: 25px;
+/* ---------------------------------------------------------------------
+ Button Styles
+------------------------------------------------------------------------ */
+
+.btn {
     cursor: pointer;
+    background-color: #eeeeee;
+    box-shadow: 3px 3px 5px #777777;
+    border-radius: 4px;
+    padding: 5px;
+
 }
 
-.transformButtons > li:hover {
+.btn:hover {
     background-color: #ff0000;
 }
 
-.transformList > li {
-    opacity: 0.5;
-    position: relative;
-    float: left;
+.btn_add {
+    text-indent: 25px;
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+    background-size: 15px 15px;
+    background-image: url('../media/images/add.png');    
+}
+
+.btn_remove {
+    text-indent: 25px;
+    background-repeat: no-repeat;
+    background-position: 6px 6px;
+    background-size: 15px 15px;
+    background-image: url('../media/images/remove.png');
+}
+
+/* ---------------------------------------------------------------------
+ Draggable Styles
+------------------------------------------------------------------------ */
+
+.draggable > * {
     width: 80px;
-    margin-right: 10px;
+    opacity: 0.5;
     cursor: move;
 }
 
-.transformList_isActive > li {
+.draggable_isActive > * {
     opacity: 1.0;
 }
 
-.transformList > li.sortable-placeholder {
+.draggable > .sortable-placeholder {
+    height: 80px;
     border: 1px dashed #CCC;
     background: none;
-    height: 80px;
 }
 
 .transformList input {
@@ -210,39 +291,37 @@ h1 {
     height: 20px;
 }
 
-.outputMatrix > * {
-    float: left;
-    margin-right: 10px;
-}
+/* ---------------------------------------------------------------------
+ Table Styles
+------------------------------------------------------------------------ */
 
-.outputMatrix td,
-.outputMatrix input {
-    font-size: 20px;
-}
-
-.outputMatrix td {
-    text-align: center;
-    vertical-align: middle;
+.cellLg {
+    width: 70px;
     min-width: 70px;
     height: 50px;
-    padding: 5px;
-}
-
-
-.outputMatrix input {
+    padding-right: 15px;
+    padding-bottom: 15px;
     text-align: center;
-    width: 70px;
-    height: 40px;
+    vertical-align: middle;
 }
 
-.outputMatrixArray {
-    font: 15px Courier;
-    height: 20px;
-    color: #eeeeee;
+.cellLg:last-child {
+    padding-right: 0px;
 }
 
+.cellLg_auto {
+    width: auto;
+}
 
-.outputCanvas canvas {
+.cellLg input {
+    text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+ Canvas Styles
+------------------------------------------------------------------------ */
+
+.canvas {
     background-color: #ffffff;
     border: 1px solid #cccccc;
 }

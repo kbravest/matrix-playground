@@ -2,12 +2,14 @@ angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
     'use strict';
 
     var Transformation = function() {
+
         this.transforms = [];
 
         this.matrix = [1,0,0,1,0,0];
 
         /**
-         * The property that was last changed
+         * Name of the property that was last changed
+         * 
          * @property lastChanged
          * @type {string}
          */
@@ -36,37 +38,49 @@ angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
     };
 
     proto.add = function(transformtype, arg1, arg2) {
-        //console.log('add', transformtype, transformList);
+        var arg1label = null;
+        var arg2label = null;
 
         if (arg1 == null && arg2 == null) {
             switch(transformtype) {
                 case 'translate':
                     arg1 = 0;
                     arg2 = 0;
+                    arg1label = 'x';
+                    arg2label = 'y';
                     break;
 
                 case 'scale':
                     arg1 = 1;
                     arg2 = 1;
+                    arg1label = 'x';
+                    arg2label = 'y';
                     break;
 
                 case 'rotate':
                     arg1 = 0;
-                    arg2 = 0;
+                    arg2 = null;
+                    arg1label = '&deg;';
+                    arg2label = null;
                     break;
 
                 case 'shear':
                     arg1 = 0;
                     arg2 = 0;
+                    arg1label = 'x';
+                    arg2label = 'y';
                     break;
             }
         }
 
+        // TODO: This would be better as a strongly typed model
         this.transforms.push(
             {
                 type: transformtype,
-                arg1: arg1, 
-                arg2: arg2
+                arg1: arg1,
+                arg2: arg2,
+                arg1label: arg1label,
+                arg2label: arg2label
             }
         );
 

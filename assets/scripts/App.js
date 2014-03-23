@@ -1,1 +1,1 @@
-var app = angular.module('MatrixPlaygroundApp', []);
+var app = angular.module('MatrixPlaygroundApp', ['ngSanitize']);

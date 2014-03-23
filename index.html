@@ -14,112 +14,18 @@
 <body>
     <h1>Matrix Transform Playground</h1>
 
-    <div ng-controller="TransformListController" class="hlist">
-        <div class="section">
-            <ul class="transformButtons">
-                <li ng-click="add(transformType)" ng-repeat="transformType in transformTypes" class="panel">
-                    <div class="btn btn_add">{{transformType}}</div>
-                </li>
-            </ul>
+    <div class="grid">
+        <div class="grid-row">
+            <ng-include src="'templates/TransformListView.html'"></ng-include>
         </div>
-        <div>
-            <ul class="js-transformList transformList" ng-class="{ transformList_isActive: isActive() }">
-                <li ng-repeat="transform in transforms" on-before-render="onBeforeRender()" class="panel">
-                    <div>
-                        {{ transform.type }}
-                    </div>
-                    <div>
-                        X: <input ng-model="transform.arg1" type="number"/>
-                    </div>
-                    <div>
-                        Y: <input ng-model="transform.arg2" type="number"/>
-                    </div>
-                    <div ng-click="remove(transform)" class="btn btn_remove">remove</div>
-                </li>
-            </ul>
+
+        <div class="grid-row">
+            <ng-include src="'templates/MatrixView.html'"></ng-include>
         </div>
-        <div style="clear:both"></div>
-    </div>
 
-
-    <div ng-controller="MatrixController" class="section">
-        <div class="outputMatrix" >
-            <table class="panel">
-                <tr>
-                    <td title="Scale in the x direction">
-                        <input ng-change="changeMatrix()" type="number" ng-model="matrix[0]" />
-                    </td>
-                    <td title="Shear in the x direction">
-                        <input ng-change="changeMatrix()" type="number" ng-model="matrix[2]" />
-                    </td>
-                    <td title="Translate in the x direction">
-                        <input ng-change="changeMatrix()" type="number" ng-model="matrix[4]" />
-                    </td>
-                </tr>
-                <tr>
-                    <td title="Shear in the y direction">
-                        <input ng-change="changeMatrix()" type="number" ng-model="matrix[1]" />
-                    </td>
-                    <td title="Scale in the y direction">
-                        <input ng-change="changeMatrix()" type="number" ng-model="matrix[3]" />
-                    </td>
-                    <td title="Translate in the y direction">
-                        <input ng-change="changeMatrix()" type="number" ng-model="matrix[5]" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>1</td>
-                </tr>
-            </table>
-
-            <table class="panel">
-                <tr>
-                    <td>x</td>
-                </tr>
-                <tr>
-                    <td>y</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                </tr>
-            </table>
-
-            <table>
-                <tr>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>=</td>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-            </table>
-
-            <table class="panel">
-                <tr>
-                    <td data-index="x">{{ formatEquationX() }}</td>
-                </tr>
-                <tr>
-                    <td data-index="y">{{ formatEquationY() }}</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                </tr>
-            </table>
+        <div class="grid-row">
+            <ng-include src="'templates/CanvasView.html'"></ng-include>
         </div>
-        <div style="clear:both"></div>
-
-        <div class="outputMatrixArray">
-            {{ formatCodeBlock() }}
-        </div>
-    </div>
-
-    <div ng-controller="CanvasController" class="outputCanvas">
-        <canvas draw>
-        </canvas>
     </div>
 
     <!-- vendor scripts -->
@@ -134,17 +40,16 @@
     <!-- models -->
     <script type="text/javascript" src="assets/scripts/models/Transformation.js"></script>
 
+    <!-- filters -->    
+    <script type="text/javascript" src="assets/scripts/filters/SafeFilter.js"></script>
+
+    <!-- directives -->    
+    <script type="text/javascript" src="assets/scripts/directives/OnRenderDirective.js"></script>
+    <script type="text/javascript" src="assets/scripts/directives/CanvasDirective.js"></script>
+
     <!-- controllers -->
     <script type="text/javascript" src="assets/scripts/controllers/TransformListController.js"></script>
     <script type="text/javascript" src="assets/scripts/controllers/MatrixController.js"></script>
     <script type="text/javascript" src="assets/scripts/controllers/CanvasController.js"></script>
-
-    <!-- directives -->    
-    <script type="text/javascript" src="assets/scripts/directives/CanvasDirective.js"></script>
-
-    <script>
-        //renderList();
-    </script>
-
 </body>
 </html>
