@@ -1,12 +1,12 @@
-angular.module('MatrixPlaygroundApp').controller('MatrixController', function ($scope, $rootScope) {
+angular.module('MatrixPlaygroundApp').controller('MatrixController', function ($scope, transformation) {
     'use strict';
 
     var DECIMAL_PLACES = 2;
 
-    $scope.matrix = $rootScope.matrix;
+    $scope.matrix = transformation.matrix;
 
     $scope.changeMatrix = function() {
-        $rootScope.lastChanged = 'matrix';
+        transformation.lastChanged = 'matrix';
     };
 
     $scope.formatEquationX = function() {

@@ -1,5 +1,5 @@
-angular.module('MatrixPlaygroundApp').controller('CanvasController', function ($scope, $rootScope) {
+angular.module('MatrixPlaygroundApp').controller('CanvasController', function ($scope, transformation) {
     'use strict';
 
-    $scope.matrix = $rootScope.matrix;
+    $scope.matrix = transformation.matrix;
 });

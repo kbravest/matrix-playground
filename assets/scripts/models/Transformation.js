@@ -1,12 +1,20 @@
-var TransformList = (function() {
+angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
     'use strict';
 
-    var TransformList = function() {
+    var Transformation = function() {
         this.transforms = [];
+
         this.matrix = [1,0,0,1,0,0];
+
+        /**
+         * The property that was last changed
+         * @property lastChanged
+         * @type {string}
+         */
+        this.lastChanged = null;
     };
 
-    var proto = TransformList.prototype;
+    var proto = Transformation.prototype;
 
     proto.update = function(rowNumber, transformtype, arg1, arg2) {
         var row = this.transforms[rowNumber];
@@ -154,5 +162,5 @@ var TransformList = (function() {
         this.setMatrix(transformTracker.getMatrix());
     };
 
-    return TransformList;
-})();
+    return new Transformation();
+});

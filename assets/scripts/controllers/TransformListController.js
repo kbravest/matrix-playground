@@ -1,9 +1,8 @@
-angular.module('MatrixPlaygroundApp').controller('TransformListController', function ($timeout, $scope, $rootScope) {
+angular.module('MatrixPlaygroundApp').controller('TransformListController', function ($timeout, $scope, transformation) {
     'use strict';
 
-    $scope.transforms = $rootScope.transforms;
+    $scope.transforms = transformation.transforms;
     $scope.transformTypes = ['translate','scale','rotate','shear'];
-
 
     var $transformList = $('.js-transformList');
     $transformList.sortable({
@@ -23,28 +22,28 @@ angular.module('MatrixPlaygroundApp').controller('TransformListController', func
             transforms.push(scope.transform);
         });
 
-        transformList.removeAll();
-        transformList.addRange(transforms);
+        transformation.removeAll();
+        transformation.addRange(transforms);
 
         $scope.$apply();
     });
 
     $scope.isActive = function() {
-        return $rootScope.lastChanged === 'transformList' ? true : false
+        return transformation.lastChanged === 'transforms' ? true : false
     };
 
     $scope.add = function(transformtype) {
-        transformList.add(transformtype);
-        $rootScope.lastChanged = 'transformList';
+        transformation.add(transformtype);
+        transformation.lastChanged = 'transforms';
     };
 
     $scope.remove = function(transform) {
-        transformList.remove(transform);
-        $rootScope.lastChanged = 'transformList';
+        transformation.remove(transform);
+        transformation.lastChanged = 'transforms';
     };
 
     $scope.$watch('transforms', function(newValue, oldValue) {
-        transformList.recomputeMatrix();
-        $rootScope.lastChanged = 'transformList';
+        transformation.recomputeMatrix();
+        transformation.lastChanged = 'transforms';
     }, true);
 });

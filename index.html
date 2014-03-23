@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div>
-            <ul class="js-transformList transformList {{ isActive() ? 'transformList_isActive' : '' }}">
+            <ul class="js-transformList transformList" ng-class="{ transformList_isActive: isActive() }">
                 <li ng-repeat="transform in transforms" on-before-render="onBeforeRender()" class="panel">
                     <div>
                         {{ transform.type }}
@@ -128,11 +128,11 @@
     <script type="text/javascript" src="assets/vendor/jquery.sortable.js"></script>
     <script type="text/javascript" src="assets/vendor/TransformTracker.js"></script>
 
-    <!-- models -->
-    <script type="text/javascript" src="assets/scripts/models/TransformList.js"></script>
-
     <!-- app -->
     <script type="text/javascript" src="assets/scripts/App.js"></script>
+
+    <!-- models -->
+    <script type="text/javascript" src="assets/scripts/models/Transformation.js"></script>
 
     <!-- controllers -->
     <script type="text/javascript" src="assets/scripts/controllers/TransformListController.js"></script>
