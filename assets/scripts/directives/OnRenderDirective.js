@@ -1,9 +1,9 @@
-angular.module('MatrixPlaygroundApp').directive('onBeforeRender', function ($timeout) {
+angular.module('MatrixPlaygroundApp').directive('onRender', function ($timeout) {
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
             if (scope.$last) {
-               scope.$evalAsync(attr.onBeforeRender);
+               scope.$evalAsync(attr.onRender);
             }
         }
     }

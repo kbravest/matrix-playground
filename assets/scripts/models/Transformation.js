@@ -1,10 +1,23 @@
-angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
+angular.module('MatrixPlaygroundApp', [])
+    .factory('transformation', function() {
+    
     'use strict';
 
     var Transformation = function() {
-
+        /**
+         * Array of affine transforms to apply in order
+         * 
+         * @property transforms
+         * @type {Array}
+         */
         this.transforms = [];
 
+        /**
+         * Underlying matrix representing the product of all affine transforms
+         * 
+         * @property matrix
+         * @type {Array}
+         */
         this.matrix = [1,0,0,1,0,0];
 
         /**
@@ -26,8 +39,6 @@ angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
         row.arg2 = arg2;
 
         this.recomputeMatrix();
-
-        console.log('updateRow', rowNumber, arg1, arg2, this.transforms);
     };
 
     proto.addRange = function(transforms) {
@@ -46,31 +57,38 @@ angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
                 case 'translate':
                     arg1 = 0;
                     arg2 = 0;
-                    arg1label = 'x';
-                    arg2label = 'y';
                     break;
 
                 case 'scale':
                     arg1 = 1;
                     arg2 = 1;
-                    arg1label = 'x';
-                    arg2label = 'y';
                     break;
 
                 case 'rotate':
                     arg1 = 0;
                     arg2 = null;
-                    arg1label = '&deg;';
-                    arg2label = null;
                     break;
 
                 case 'shear':
                     arg1 = 0;
                     arg2 = 0;
-                    arg1label = 'x';
-                    arg2label = 'y';
                     break;
             }
+        }
+
+        // Set labels
+        switch(transformtype) {
+            case 'translate':
+            case 'scale':
+            case 'shear':
+                arg1label = 'x';
+                arg2label = 'y';
+                break;
+
+            case 'rotate':
+                arg1label = '&deg;';
+                arg2label = null;
+                break;
         }
 
         // TODO: This would be better as a strongly typed model
@@ -130,7 +148,7 @@ angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
 
     proto.getMatrix = function() {
         return this.matrix;
-    };    
+    };
 
     proto.recomputeMatrix = function() {
         var x;
@@ -140,8 +158,6 @@ angular.module('MatrixPlaygroundApp', []).factory('transformation', function() {
 
         for (var i = 0; i < this.transforms.length; i++) {
             var transform = this.transforms[i];
-
-            //console.log(transform.type, transform.arg1, transform.arg2);
 
             switch(transform.type) {
                 case 'translate':

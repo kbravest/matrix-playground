@@ -1,4 +1,6 @@
-angular.module('MatrixPlaygroundApp').directive('renderCanvas', function () {
+angular.module('MatrixPlaygroundApp')
+    .directive('renderCanvas', function () {
+        
     'use strict';
 
     var CANVAS_WIDTH = 600;
@@ -59,20 +61,20 @@ angular.module('MatrixPlaygroundApp').directive('renderCanvas', function () {
 
     proto.onImageLoad = function() {
         // Set up watch listener
-        this.$scope.$watchCollection('matrix', this.onMatrixChange.bind(this));
+        this.$scope.$watchCollection('matrix', this.onModelChange.bind(this));
 
         // Render for the first time
         this.render(this.context);
     };
 
     /**
-     * Re-renders the scene upon change to the matrix transform
+     * Re-renders the scene upon change to the matrix
      *
-     * @method  onMatrixChange
-     * @param  {Array} newValue Matrix transform array in form [1,0,0,1,0,0]
-     * @param  {Array} oldValue Matrix transform array in form [1,0,0,1,0,0]
+     * @method  onModelChange
+     * @param  {Array} newValue Matrix array in form [1,0,0,1,0,0]
+     * @param  {Array} oldValue Matrix array in form [1,0,0,1,0,0]
      */
-    proto.onMatrixChange = function(newValue, oldValue) {
+    proto.onModelChange = function(newValue, oldValue) {
         this.render(this.context);
     };
 
